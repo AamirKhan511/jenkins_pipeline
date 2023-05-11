@@ -4,6 +4,6 @@ node{
     }
     
      stage('Bulid Docker Image'){
-    sh 'docker build -t wesite .'
+    sh 'docker build -t aamir335/website .'
     }
 }
