@@ -14,7 +14,10 @@ pipeline{
                 git 'https://github.com/AamirKhan511/jenkins_pipeline.git'
             }
         }
-
+        stage('Initialize'){
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+       }
         stage('Build') {
 
             steps {
