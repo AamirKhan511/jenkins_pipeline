@@ -18,7 +18,7 @@ pipeline{
         stage('Build') {
 
             steps {
-                sh 'docker build -t aamir335/app:latest .'
+                sh '/usr/bin/docker build -t aamir335/app:latest .'
             }
         }
 
