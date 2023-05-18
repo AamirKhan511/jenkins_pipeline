@@ -11,7 +11,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'sudo docker build -t aamir335/app:latest .'
+        sh 'sudo docker build -t aamir335/app:latest2 .'
       }
     }
     stage('Login') {
@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh 'sudo docker push aamir335/app:latest'
+        sh 'sudo docker push aamir335/app:latest2'
       }
     }
   }
