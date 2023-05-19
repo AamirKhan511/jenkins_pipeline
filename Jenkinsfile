@@ -1,6 +1,6 @@
+def application = "devops"
 pipeline {
   agent any
-def application = "devops"
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
   }
