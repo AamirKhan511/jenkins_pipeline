@@ -11,7 +11,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'sudo docker build -t aamir335/app:latest4 .'
+        sh 'sudo docker build -t aamir335/app:${BUILD_NUMBER} .'
       }
     }
     stage('Login') {
@@ -21,9 +21,15 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh 'sudo docker push aamir335/app:latest4'
+        sh 'sudo docker push aamir335/app:${BUILD_NUMBER}'
       }
     }
+   stage('Docker deploy'){
+            steps {
+               
+                sh 'docker run -itd -p  80:80 aamir335/app:${BUILD_NUMBER}'
+            }
+        }
   }
   post {
     always {
