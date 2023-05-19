@@ -1,5 +1,6 @@
 pipeline {
   agent any
+def application = "devops"
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
   }
@@ -24,12 +25,21 @@ pipeline {
         sh 'sudo docker push aamir335/app:${BUILD_NUMBER}'
       }
     }
+   stage('Remove running container with old code'){
+          steps {
+              sh 'docker rm -f \$(docker ps -a -f name=devops -q) || true' 
+            }
+         }
    stage('Docker deploy'){
             steps {
-               
-                sh 'docker run -itd -p  80:80 aamir335/app:${BUILD_NUMBER}'
+                sh 'docker run --name devops -d -p 80:80 aamir335/app:${BUILD_NUMBER}'
             }
         }
+    stage('Remove old images') {
+          steps{
+               sh("docker rmi aamir335/app:latest -f")
+           }
+       } 
   }
   post {
     always {
