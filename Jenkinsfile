@@ -40,6 +40,12 @@ pipeline {
                sh("docker rmi aamir335/app:latest -f")
            }
        } 
+    stage('slack message') {
+        steps{
+            slackSend channel: 'aamirkhan335', 
+                          message: 'Hello, world'
+        }
+    }  
   }
   post {
     always {
