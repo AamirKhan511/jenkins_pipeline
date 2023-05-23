@@ -15,6 +15,14 @@ pipeline {
         sh 'sudo docker build -t aamir335/app:${BUILD_NUMBER} .'
       }
     }
+    stage('approvel') {
+      steps {
+        timeout(time: 15, unit: "MINUTES") {
+                      input message: 'Do you want to approve the deployment?', ok: 'Yes'
+                  }
+                  echo "Initiating deployment"
+      }
+    }
     stage('Login') {
       steps {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
